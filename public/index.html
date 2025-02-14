@@ -6,14 +6,23 @@
     <title>Asteroid Avoidance</title>
 </head>
 <body style="background-image: url(images/space.jpg);">
-    <div style="text-align: center;">
+    <div style="text-align: center; font-family: monospace;">
             <canvas width="800" height="600" style="border:1px solid black; background-color: black; text-align: center;"></canvas>
-    <form method="#" action="#" class="highscore" style="text-align: center;" >
-        <input type="text" placeholder="Enter your name for High Score" style="position: relative;" />
-        <button style="position: relative;">Submit</button>
+    <form method="post" action="/AddScore" class="highscore" style="text-align: center;" >
+        <input id="name" name="name" type="text" placeholder="Enter your name for High Score"
+         style="position: relative; font-family: monospace; width: 250px;" />
+        <br>
+        <input id="score" name="score" type="hidden" />
+        <button style="position: relative; font-family: monospace;">Submit</button>
+        <br>
     </form>
+    <br>
+    <a href="highscores.html" style="color: white; font-family: monospace;">view highscores</a>
     </div>
-
+    <script src="app.js"></script>
     <script src="script.js"></script>
+
+
+    
 </body>
 </html>

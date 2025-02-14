@@ -1,3 +1,6 @@
+
+
+
 var c = document.querySelector("canvas");
 var ctx = c.getContext("2d");
 var timer = requestAnimationFrame(main);
@@ -16,6 +19,8 @@ var highScoreElements = document.querySelector('.highscore');
 
 bgMain.src = "images/rocks.jpg";
 cookieSprite.src = "images/cookie.png";
+
+
 
 //event listener to trigger main when image is loaded
 bgMain.onload = function(){
@@ -200,6 +205,7 @@ function keyPressDown(e){
     }
 }
 
+
 //GameStates state machine. This is what sets up menu screens and main agme scene
 
 //---Main Menu---
@@ -207,11 +213,11 @@ gameStates[0] = function(){
     highScoreElements.style.display = "none";
     ctx.drawImage(bgMain,0,0,c.width,c.height);
     ctx.save();
-    ctx.font = "30px Arial";
+    ctx.font = "30px monospace";
     ctx.fillStyle = "white";
     ctx.textAlign = "center"
     ctx.fillText("Asteroid Avoidance", c.width/2, c.height/2 - 30);
-    ctx.font = "15px Arial";
+    ctx.font = "15px monospace";
     ctx.fillText("Press Enter to Start", c.width/2, c.height/2 + 20);
     ctx.restore();
 }
@@ -220,7 +226,7 @@ gameStates[0] = function(){
 gameStates[1] = function(){
     //Draws score to the HUD
     ctx.save();
-    ctx.font = "15px Arial";
+    ctx.font = "15px monospace";
     ctx.fillStyle = 'white';
     ctx.fillText("Score: " + score.toString(), c.width - 150, 30);
     ctx.restore();
@@ -290,31 +296,35 @@ gameStates[2] = function(){
     if(score > highScore){
         highScore = score;
         ctx.save();
-        ctx.font = "30px Arial";
+        ctx.font = "30px monospace";
         ctx.fillStyle = "white";
         ctx.textAlign = "center"
         ctx.fillText("Game Over, Your score was: " + score.toString(), c.width/2, c.height/2 - 60);
         ctx.fillText("Your New High Score is: " + highScore.toString() , c.width/2, c.height/2 - 30);
         ctx.fillText("New Record!!", c.width/2, c.height/2 );
-        ctx.font = "15px Arial";
+        ctx.font = "15px monospace";
         ctx.fillText("Press Enter to Start", c.width/2, c.height/2 + 20);
         ctx.restore();
+
+        const scoreTxt = document.getElementById("score");
+        scoreTxt.value =score;
 
     }
     else{
         ctx.save();
-        ctx.font = "30px Arial";
+        ctx.font = "30px monospace";
         ctx.fillStyle = "white";
         ctx.textAlign = "center"
         ctx.fillText("Game Over, Your score was: " + score.toString(), c.width/2, c.height/2 - 60);
         ctx.fillText("Your high Score is: " + highScore.toString(), c.width/2, c.height/2 - 30);
-        ctx.font = "15px Arial";
+        ctx.font = "15px monospace";
         ctx.fillText("Press Enter to Start", c.width/2, c.height/2 + 20);
         ctx.restore();
     }
-
     
 }
+
+
 
 
 //---Main Game Loop---
@@ -346,6 +356,15 @@ function scoreTimer(){
        // console.log(score);
         setTimeout(scoreTimer, 1000);
     }
+}
+
+
+//--script for adding new score from app.js
+async function AddScore(){
+    const response = fetch ("/AddScore");
+
+    const newScore = response.json();
+
 }
 
 

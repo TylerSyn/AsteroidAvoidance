@@ -39,16 +39,28 @@ app.get("/",(req,res)=>{
 
 app.post("/AddScore",async (req,res)=>{
 try{
-    scoreToAdd = 2;
-    Name = "Tyler";
-    const newScore = new Score(Name,scoreToAdd) ;
+    
+    const newScore = new Score(req.body);
+    //console.log(req.body);
     const saveScore = await newScore.save();
     res.redirect("/");
+    console.log(saveScore);
 
 }catch(error){
     res.status(501).json({error:"Failed to add new high score."});
 }
 });
+
+app.get("/scores", async (req,res)=>{
+    try{
+        const score = await Score.find();
+        res.json(score);
+        console.log(score);
+    }catch(err){
+        res.status(500).json({error:"Failed to get Score."});
+    }
+})
+
 
 
 app.listen(port, ()=>{
