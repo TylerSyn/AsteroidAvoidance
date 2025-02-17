@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({extended:true}));
 
 //MongoDB connection setup
-const mongoURI = "mongodb://localhost:27017/AsteroidScores";
+const mongoURI = "mongodb+srv://tycsnot:DBpassword!@assignment5.1yymw.mongodb.net/";
 mongoose.connect(mongoURI);
 
 const db = mongoose.connection;
